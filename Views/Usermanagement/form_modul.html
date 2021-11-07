@@ -1,0 +1,131 @@
+{extends file="../Shared/portoku.master.html"}
+
+{block name=bodycontent}            
+<!-- template diambil dari porto forms-layouts.html Horizontal Form -->
+<style>
+div.scrollt {
+        width: 100px;
+    height: 100px;
+    overflow: scroll;
+}
+</style>
+
+                    
+<div class="row">
+    <div class="col-md-10">
+        <!-- form diarahkan ke action save dengan metode POST -->
+         <form id="form1" class="form-horizontal" method="POST" action="{$baseUrl}/Usermanagement/save_modul" enctype="multipart/form-data" > 
+        <!-- <form id="form1" > -->
+            <section class="panel">
+                <header class="panel-heading">
+                    <h2 class="panel-title">{$pageTitle}<Textfile></Textfile></h2>                    
+                </header>
+                
+                <div class="panel-body">
+                    <!-- <i>User : </i><br> -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Id : </label>
+                        <div class="col-sm-10">
+                        <span class="show-grid-block">
+                                <input type="text" name="id" class="form-control" id="id" value="{$data_modul.id}" readonly >
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Modul Name : </label>
+                        <div class="col-sm-10">
+                        <span class="show-grid-block">
+                                <input type="text" name="modul_name" placeholder=".Enter Modul Name here" class="form-control" id="modul_name" value="{$data_modul.modul_name}" required>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Modul Location : </label>
+                        <div class="col-sm-10">
+                        <span class="show-grid-block">
+                                <input type="text" name="modul_location" placeholder=".Enter Modul Name here" class="form-control" id="modul_location" value="{$data_modul.modul_location}" required>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group " >
+                        <label class="col-sm-2 control-label">Main Modul Name : </label>
+                        <div class="col-sm-10"><span class="show-grid-block">
+                                        <select name="main_modul_id" id="main_modul_id" class="form-control populate" value="{$data_modul.main_modul_id}" required >
+                                           <option value='999'>- UnMapp -</option>   
+                                              {foreach from=$all_msmainmodel item=data}
+                                        <option value="{$data.id}" {if $data_modul.main_modul_id==$data.id} selected {/if}>{$data.main_modul_name}</option>
+                                            {/foreach}  
+                                             <!-- <option value="DEPT">DEPT</option> 
+                                            <option value="DIV">DIV</option> -->
+                                            
+                                        </select> 
+                                        <!-- <input type="hidden" class="form-control" id="prj_sts_desc" name="prj_sts_desc" value="{$data_msprj.prj_sts_desc}">     -->
+                                        </span>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="form-group " >
+                        <label class="col-sm-2 control-label">Add to Menu : </label>
+                        <div class="col-sm-1"><span class="show-grid-block">
+                                        <select name="add_to_menu" id="add_to_menu" class="form-control populate" value="{$data_modul.add_to_menu}" required>
+                                        <option value="yes" {if $data_modul.add_to_menu=='yes'} selected {/if}>yes</option>  
+                                        <option value="no" {if $data_modul.add_to_menu=='no'} selected {/if}>no</option>
+                                        </select> 
+                             
+                                        </span>
+                        </div>
+                    </div> -->
+
+                </div>
+                <footer class="panel-footer">
+                    <button class="btn btn-primary" id="btnAdd">Save</button>            
+                    <!-- btnCancel ini akan melakukan back ke halaman sebelumnya -->        
+                    <button type="reset" class="btn btn-default" id="btnCancel">Cancel</button>
+                </footer>
+            </section>
+        </form>
+    </div>
+</div>
+            
+<style>
+			.show-grid-block {
+				background-color: #EEE;
+				border: 1px solid #FFF;
+				display: block;
+				line-height: 40px;
+				min-height: 40px;
+				text-align: center;
+			}
+
+			html.dark .show-grid-block {
+				background-color: #282d36;
+				border-color: #282d36;
+			}
+		</style>
+
+{/block}
+{block name=bodyfooter}
+<style type="text/css">
+  .columnsorter { cursor: pointer; }
+</style>
+<!-- <script src="{$baseUrl}/assets/javascripts/ui-elements/examples.modals.js"></script> -->
+
+<script type="text/javascript">
+
+var baseUrl = "{$baseUrl}";
+
+
+
+    $("#btnCancel").click(function()
+    {
+        // fungsi untuk kembali ke halaman sebelumnya
+        parent.history.back();
+        return false;
+    });
+</script>
+
+<link rel="stylesheet" href="{$baseUrl}/assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css" />
+
+<script src="{$baseUrl}/assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+
+{/block}

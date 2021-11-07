@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^assets.*(\.css|\.js|\.jpg|\.jpeg|\.png|\.gif|\.ttf|\.woff) - [NC,L]
+RewriteCond %{REQUEST_URI} !-d
+RewriteRule ^.*$ index.php
